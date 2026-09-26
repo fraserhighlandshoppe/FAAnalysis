@@ -1,0 +1,12 @@
+@startuml
+start
+:Entry inventory/index.php;
+if (Access allowed) then (yes)
+  :Load module functions;
+else (no)
+  :Redirect or deny access;
+  stop
+endif
+:Process request;
+stop
+@enduml

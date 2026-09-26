@@ -1,0 +1,28 @@
+@startuml
+start
+:Access restricted check;
+if (path_to_root not set?) then (yes)
+  :die("Restricted access");
+  stop
+else (no)
+  :include applications;
+endif
+
+:Create front_accounting instance;
+:display();
+  :include renderer;
+  :init();
+    :Create menu;
+    :Add applications (customers, suppliers, inventory, etc.);
+    if (use_manufacturing?) then (yes)
+      :Add manufacturing_app;
+    endif
+    if (use_fixed_assets?) then (yes)
+      :Add assets_app;
+    endif
+    :Add dimensions_app, general_ledger_app;
+    :Invoke hooks;
+    :Add setup_app;
+  :display_applications;
+  :wa_header / wa_footer;
+@enduml
