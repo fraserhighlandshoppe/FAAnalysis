@@ -7,31 +7,46 @@ start
 :Include session.inc");;
 :Include ui.inc");;
 :Include contacts_view.inc");;
-if ($SysPrefs->use_popup_windows && $SysPref) then (yes)
-  :Process condition;
+if ($SysPrefs->use_popup_windows && $SysPrefs->use_pop) then (yes)
+  :Evaluate condition;
 else (no)
-  :Skip;
+  :Skip $SysPrefs->use_popup;
 endif
 if (isset($_GET['debtor_no']))) then (yes)
-  :Process condition;
+  :(isset());
 else (no)
-  :Skip;
+  :Skip isset($_GET['debtor_;
 endif
 if (isset($_GET['SelectedBranch']))) then (yes)
-  :Process condition;
+  :(isset());
 else (no)
-  :Skip;
+  :Skip isset($_GET['Selecte;
 endif
-if ($Mode=='ADD_ITEM' || $Mode=='UPDATE_ITEM) then (yes)
-  :Process condition;
+if ($Mode=='ADD_ITEM' || $Mode=='UPDATE_ITEM')) then (yes)
+  :Evaluate condition;
 else (no)
-  :Skip;
+  :Skip $Mode=='ADD_ITEM' ||;
 endif
 if (strlen($_POST['br_name']) == 0)) then (yes)
-  :Process condition;
+  :(strlen());
 else (no)
-  :Skip;
+  :Skip strlen($_POST['br_na;
 endif
-:Render output;
+if (strlen($_POST['br_ref']) == 0)) then (yes)
+  :(strlen());
+else (no)
+  :Skip strlen($_POST['br_re;
+endif
+if ($input_error != 1)) then (yes)
+  :Evaluate condition;
+else (no)
+  :Skip $input_error != 1);
+endif
+if ($selected_id != -1)) then (yes)
+  :Evaluate condition;
+else (no)
+  :Skip $selected_id != -1);
+endif
+:Output (form / display / data);
 stop
 @enduml

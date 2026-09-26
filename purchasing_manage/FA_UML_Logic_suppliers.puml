@@ -8,31 +8,46 @@ start
 :Include ui.inc");;
 :Include contacts_view.inc");;
 if ($SysPrefs->use_popup_windows)) then (yes)
-  :Process condition;
+  :Evaluate condition;
 else (no)
-  :Skip;
+  :Skip $SysPrefs->use_popup;
 endif
 if (user_use_date_picker())) then (yes)
-  :Process condition;
+  :(user_use_date_picker());
 else (no)
-  :Skip;
+  :Skip user_use_date_picker;
 endif
 if (isset($_GET['supplier_id']))) then (yes)
-  :Process condition;
+  :(isset());
 else (no)
-  :Skip;
+  :Skip isset($_GET['supplie;
 endif
 if ($supplier_id)) then (yes)
-  :Process condition;
+  :Evaluate condition;
 else (no)
-  :Skip;
+  :Skip $supplier_id);
 endif
-if ($supplier_id && !is_new_supplier($suppli) then (yes)
-  :Process condition;
+if ($supplier_id && !is_new_supplier($supplier_id) && ) then (yes)
+  :(is_new_supplier());
 else (no)
-  :Skip;
+  :Skip $supplier_id && !is_;
 endif
-:Call supplier_settings();
-:Render output;
+if (is_new_supplier($supplier_id))) then (yes)
+  :(is_new_supplier());
+else (no)
+  :Skip is_new_supplier($sup;
+endif
+if (!$supplier_id) table_section(2)) then (yes)
+  :(table_section());
+else (no)
+  :Skip !$supplier_id) table;
+endif
+if (!$supplier_id) {) then (yes)
+  :Evaluate condition;
+else (no)
+  :Skip !$supplier_id) {;
+endif
+:(supplier_settings());
+:Output (form / display / data);
 stop
 @enduml

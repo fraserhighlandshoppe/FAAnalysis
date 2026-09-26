@@ -4,11 +4,11 @@ start
 :Entry dimensions;
 :Load session/auth;
 if ($dim > 0)) then (yes)
-  :Process condition;
+  :Evaluate condition;
 else (no)
-  :Skip;
+  :Skip $dim > 0);
 endif
-:Call __construct();
-:Render output;
+:(__construct());
+:Output (form / display / data);
 stop
 @enduml

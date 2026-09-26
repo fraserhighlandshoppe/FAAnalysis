@@ -3,7 +3,7 @@ title Detailed Logic Flow - fixed_assets
 start
 :Entry fixed_assets;
 :Load session/auth;
-:Call __construct();
-:Render output;
+:(__construct());
+:Output (form / display / data);
 stop
 @enduml

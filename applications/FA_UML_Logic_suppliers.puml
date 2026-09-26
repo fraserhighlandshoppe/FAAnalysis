@@ -3,7 +3,7 @@ title Detailed Logic Flow - suppliers
 start
 :Entry suppliers;
 :Load session/auth;
-:Call __construct();
-:Render output;
+:(__construct());
+:Output (form / display / data);
 stop
 @enduml

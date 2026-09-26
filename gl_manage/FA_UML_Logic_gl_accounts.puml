@@ -8,32 +8,47 @@ start
 :Include gl_db.inc");;
 :Include tags_db.inc");;
 :Include data_checks.inc");;
-if ($SysPrefs->use_popup_windows && $SysPref) then (yes)
-  :Process condition;
+if ($SysPrefs->use_popup_windows && $SysPrefs->use_pop) then (yes)
+  :Evaluate condition;
 else (no)
-  :Skip;
+  :Skip $SysPrefs->use_popup;
 endif
 if (isset($_POST['_AccountList_update']))) then (yes)
-  :Process condition;
+  :(isset());
 else (no)
-  :Skip;
+  :Skip isset($_POST['_Accou;
 endif
 if (isset($_POST['selected_account']))) then (yes)
-  :Process condition;
+  :(isset());
 else (no)
-  :Skip;
+  :Skip isset($_POST['select;
 endif
-if (isset($_POST['add']) || isset($_POST['up) then (yes)
-  :Process condition;
+if (isset($_POST['add']) || isset($_POST['update']))) then (yes)
+  :(isset());
 else (no)
-  :Skip;
+  :Skip isset($_POST['add']);
 endif
-if (strlen(trim($_POST['account_code'])) == ) then (yes)
-  :Process condition;
+if (strlen(trim($_POST['account_code'])) == 0)) then (yes)
+  :(strlen());
 else (no)
-  :Skip;
+  :Skip strlen(trim($_POST[';
 endif
-:Call can_delete();
-:Render output;
+if ($input_error != 1)) then (yes)
+  :Evaluate condition;
+else (no)
+  :Skip $input_error != 1);
+endif
+if ($SysPrefs->accounts_alpha() == 2)) then (yes)
+  :(accounts_alpha());
+else (no)
+  :Skip $SysPrefs->accounts_;
+endif
+if (!isset($_POST['account_tags']))) then (yes)
+  :(isset());
+else (no)
+  :Skip !isset($_POST['accou;
+endif
+:(can_delete());
+:Output (form / display / data);
 stop
 @enduml

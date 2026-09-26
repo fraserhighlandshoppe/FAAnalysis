@@ -10,32 +10,47 @@ start
 :Include ui.inc");;
 :Include contacts_view.inc");;
 if ($SysPrefs->use_popup_windows)) then (yes)
-  :Process condition;
+  :Evaluate condition;
 else (no)
-  :Skip;
+  :Skip $SysPrefs->use_popup;
 endif
 if (user_use_date_picker())) then (yes)
-  :Process condition;
+  :(user_use_date_picker());
 else (no)
-  :Skip;
+  :Skip user_use_date_picker;
 endif
 if (isset($_GET['debtor_no']))) then (yes)
-  :Process condition;
+  :(isset());
 else (no)
-  :Skip;
+  :Skip isset($_GET['debtor_;
 endif
 if (strlen($_POST['CustName']) == 0)) then (yes)
-  :Process condition;
+  :(strlen());
 else (no)
-  :Skip;
+  :Skip strlen($_POST['CustN;
 endif
 if (strlen($_POST['cust_ref']) == 0)) then (yes)
-  :Process condition;
+  :(strlen());
 else (no)
-  :Skip;
+  :Skip strlen($_POST['cust_;
 endif
-:Call can_process();
-:Call handle_submit();
-:Render output;
+if (!check_num('credit_limit', 0))) then (yes)
+  :(check_num());
+else (no)
+  :Skip !check_num('credit_l;
+endif
+if (!check_num('pymt_discount', 0, 100))) then (yes)
+  :(check_num());
+else (no)
+  :Skip !check_num('pymt_dis;
+endif
+if (!check_num('discount', 0, 100))) then (yes)
+  :(check_num());
+else (no)
+  :Skip !check_num('discount;
+endif
+:(can_process());
+:(handle_submit());
+:Output (form / display / data);
 stop
 @enduml
