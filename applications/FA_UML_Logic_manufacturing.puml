@@ -1,0 +1,9 @@
+@startuml
+title Detailed Logic Flow - manufacturing
+start
+:Entry manufacturing;
+:Load session/auth;
+:Call __construct();
+:Render output;
+stop
+@enduml

@@ -1,0 +1,9 @@
+@startuml
+title Detailed Logic Flow - generalledger
+start
+:Entry generalledger;
+:Load session/auth;
+:Call __construct();
+:Render output;
+stop
+@enduml

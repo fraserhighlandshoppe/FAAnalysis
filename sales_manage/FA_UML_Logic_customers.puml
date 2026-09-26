@@ -1,0 +1,41 @@
+@startuml
+title Detailed Logic Flow - customers
+start
+:Entry customers;
+:Load session/auth;
+:Include db_pager.inc");;
+:Include session.inc");;
+:Include date_functions.inc");;
+:Include banking.inc");;
+:Include ui.inc");;
+:Include contacts_view.inc");;
+if ($SysPrefs->use_popup_windows)) then (yes)
+  :Process condition;
+else (no)
+  :Skip;
+endif
+if (user_use_date_picker())) then (yes)
+  :Process condition;
+else (no)
+  :Skip;
+endif
+if (isset($_GET['debtor_no']))) then (yes)
+  :Process condition;
+else (no)
+  :Skip;
+endif
+if (strlen($_POST['CustName']) == 0)) then (yes)
+  :Process condition;
+else (no)
+  :Skip;
+endif
+if (strlen($_POST['cust_ref']) == 0)) then (yes)
+  :Process condition;
+else (no)
+  :Skip;
+endif
+:Call can_process();
+:Call handle_submit();
+:Render output;
+stop
+@enduml

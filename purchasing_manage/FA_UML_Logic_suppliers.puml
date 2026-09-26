@@ -1,0 +1,38 @@
+@startuml
+title Detailed Logic Flow - suppliers
+start
+:Entry suppliers;
+:Load session/auth;
+:Include db_pager.inc");;
+:Include session.inc");;
+:Include ui.inc");;
+:Include contacts_view.inc");;
+if ($SysPrefs->use_popup_windows)) then (yes)
+  :Process condition;
+else (no)
+  :Skip;
+endif
+if (user_use_date_picker())) then (yes)
+  :Process condition;
+else (no)
+  :Skip;
+endif
+if (isset($_GET['supplier_id']))) then (yes)
+  :Process condition;
+else (no)
+  :Skip;
+endif
+if ($supplier_id)) then (yes)
+  :Process condition;
+else (no)
+  :Skip;
+endif
+if ($supplier_id && !is_new_supplier($suppli) then (yes)
+  :Process condition;
+else (no)
+  :Skip;
+endif
+:Call supplier_settings();
+:Render output;
+stop
+@enduml

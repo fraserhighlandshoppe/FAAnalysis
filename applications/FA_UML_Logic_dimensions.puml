@@ -1,0 +1,14 @@
+@startuml
+title Detailed Logic Flow - dimensions
+start
+:Entry dimensions;
+:Load session/auth;
+if ($dim > 0)) then (yes)
+  :Process condition;
+else (no)
+  :Skip;
+endif
+:Call __construct();
+:Render output;
+stop
+@enduml

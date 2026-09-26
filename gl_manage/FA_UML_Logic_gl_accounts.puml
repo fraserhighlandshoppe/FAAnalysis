@@ -1,0 +1,39 @@
+@startuml
+title Detailed Logic Flow - gl_accounts
+start
+:Entry gl_accounts;
+:Load session/auth;
+:Include session.inc");;
+:Include ui.inc");;
+:Include gl_db.inc");;
+:Include tags_db.inc");;
+:Include data_checks.inc");;
+if ($SysPrefs->use_popup_windows && $SysPref) then (yes)
+  :Process condition;
+else (no)
+  :Skip;
+endif
+if (isset($_POST['_AccountList_update']))) then (yes)
+  :Process condition;
+else (no)
+  :Skip;
+endif
+if (isset($_POST['selected_account']))) then (yes)
+  :Process condition;
+else (no)
+  :Skip;
+endif
+if (isset($_POST['add']) || isset($_POST['up) then (yes)
+  :Process condition;
+else (no)
+  :Skip;
+endif
+if (strlen(trim($_POST['account_code'])) == ) then (yes)
+  :Process condition;
+else (no)
+  :Skip;
+endif
+:Call can_delete();
+:Render output;
+stop
+@enduml

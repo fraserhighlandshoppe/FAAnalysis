@@ -1,0 +1,9 @@
+@startuml
+title Detailed Logic Flow - customers
+start
+:Entry customers;
+:Load session/auth;
+:Call __construct();
+:Render output;
+stop
+@enduml

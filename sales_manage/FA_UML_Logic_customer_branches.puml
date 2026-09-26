@@ -1,0 +1,37 @@
+@startuml
+title Detailed Logic Flow - customer_branches
+start
+:Entry customer_branches;
+:Load session/auth;
+:Include db_pager.inc");;
+:Include session.inc");;
+:Include ui.inc");;
+:Include contacts_view.inc");;
+if ($SysPrefs->use_popup_windows && $SysPref) then (yes)
+  :Process condition;
+else (no)
+  :Skip;
+endif
+if (isset($_GET['debtor_no']))) then (yes)
+  :Process condition;
+else (no)
+  :Skip;
+endif
+if (isset($_GET['SelectedBranch']))) then (yes)
+  :Process condition;
+else (no)
+  :Skip;
+endif
+if ($Mode=='ADD_ITEM' || $Mode=='UPDATE_ITEM) then (yes)
+  :Process condition;
+else (no)
+  :Skip;
+endif
+if (strlen($_POST['br_name']) == 0)) then (yes)
+  :Process condition;
+else (no)
+  :Skip;
+endif
+:Render output;
+stop
+@enduml
