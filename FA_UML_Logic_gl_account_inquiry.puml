@@ -1,0 +1,95 @@
+@startuml
+start
+:Security check (SA_GLTRANSVIEW);
+:Load includes (session, db, date, ui, checks, gl_db);
+
+:Build JS (popup/date picker) based on prefs;
+:Render page header;
+
+if (Ajax 'Show'?) then (yes)
+  :Activate trans_tbl ajax;
+endif
+
+:Map GET params to POST (account, dates, dimensions, amounts);
+
+if (amount_min not set?) then (yes)
+  :Set default 0;
+else (no)
+endif
+if (amount_max not set?) then (yes)
+  :Set default 0;
+endif
+
+:Render controls (gl_inquiry_controls);
+  if (use_dimension >= 1?) then (yes)
+    :Show Dimension 1 list;
+  endif
+  if (use_dimension > 1?) then (yes)
+    :Show Dimension 2 list;
+  endif
+  :Show date cells, amount min/max, Submit 'Show';
+
+if (POST 'Show' or POST 'account'?) then (yes)
+  :Call show_results();
+    :Check account (POST account?);
+    :Get GL account name;
+    :Get transactions (date range, account, dims, amount range);
+    
+    if (account specified?) then (yes)
+      :Display heading with account + name;
+    else (no)
+      :No account heading;
+    endif
+    
+    :Calculate show_balances:
+      (account != null AND min==0 AND max==0);
+    
+    if (show_balances?) then (yes)
+      :Determine opening balance (fiscal year begin / date - 1);
+      if (balance sheet account?) then (yes)
+        :Opening balance = empty;
+      else (no)
+        :Calculate balance from fiscal year begin to TransFromDate;
+      endif
+      :Display opening balance row;
+    endif
+    
+    :Initialize running_total = opening balance;
+    :Initialize row counter j = 1, color k = 0;
+    
+    while (fetch result row?) is (yes)
+      :Alternate row color (k);
+      :running_total += amount;
+      :Format date, type label, link, memo (comments lookup);
+      if (account == null?) then (yes)
+        :Show Account column;
+      endif
+      if (dim >= 1?) then (yes)
+        :Show Dimension 1;
+      endif
+      if (dim > 1?) then (yes)
+        :Show Dimension 2;
+      endif
+      :Show Person/Item, Debit/Credit;
+      if (show_balances?) then (yes)
+        :Show running balance;
+      endif
+      if (memo empty?) then (yes)
+        :Load comments string;
+      endif
+      :Increment j; reset if j==12 (table header); increment k;
+    endwhile
+    
+    if (show_balances?) then (yes)
+      :Display ending balance row;
+    endif
+    
+    if (no rows returned?) then (yes)
+      :Display note "No transactions...";
+    endif
+  else (no)
+  endif
+
+:End page;
+stop
+@enduml
